@@ -27,11 +27,11 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 48.0
+radius = 45.7142
 height = 37.9368
 
 [node name="Mob" type="RigidBody2D" groups=["mobs"]]
-collision_layer = 0
+scale = Vector2( 0.7, 0.7 )
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource( 7 )

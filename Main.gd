@@ -1,9 +1,32 @@
 extends Node
 
 export (PackedScene) var mob_scene
+var score = 0
+
 
 func _ready():
 	randomize()
+	
+	
+func new_game():
+	score = 0
+	$HUD.update_score(score)
+	
+	$StartTimer.start()
+	
+	$HUD.show_message("Get ready...")
+	
+	yield($StartTimer, 'timeout')  # will wait until certain signal is emitted
+	
+	$ScoreTimer.start()
+	$MobTimer.start()
+	
+	
+func game_over():
+	$ScoreTimer.stop()
+	$MobTimer.stop()
+	$HUD.show_game_over()
+	
 	
 func _on_MobTimer_timeout():
 	var mob_spawn_location = $MobPath/MobSpawnLocation
@@ -20,3 +43,8 @@ func _on_MobTimer_timeout():
 	
 	var velocity = Vector2(rand_range(mob.min_speed, mob.max_speed), 0)
 	mob.linear_velocity = velocity.rotated(direction)
+
+
+func _on_ScoreTimer_timeout():
+	score += 1
+	$HUD.update_score(score)

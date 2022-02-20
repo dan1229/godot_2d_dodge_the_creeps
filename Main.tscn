@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Mob.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -24,10 +26,24 @@ __meta__ = {
 curve = SubResource( 1 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2( 0, 0.00122178 )
+rotation = -0.000312867
 offset = 2398.56
 
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
-autostart = true
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 240, 320 )
+
+[node name="HUD" parent="." instance=ExtResource( 4 )]
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_MobTimer_timeout"]
+[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_ScoreTimer_timeout"]
