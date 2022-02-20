@@ -27,8 +27,8 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 45.7142
-height = 37.9368
+radius = 63.2652
+height = 63.6736
 
 [node name="Mob" type="RigidBody2D" groups=["mobs"]]
 scale = Vector2( 0.7, 0.7 )
@@ -42,6 +42,7 @@ animation = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
+scale = Vector2( 0.7, 0.7 )
 shape = SubResource( 2 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
